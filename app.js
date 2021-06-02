@@ -4,6 +4,8 @@ const app = express();
 require('dotenv/config');
 
 // Import routes
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
 
 const postRoutes = require('./routes/posts');
 
