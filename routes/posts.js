@@ -8,7 +8,21 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
+    const post = new Post({
+        title: req.body.title,
+        description: req.body.description
+    });
+
+    post.save()
+    .then(data => {
+        res.json(data);
+    })
+    .catch(error => {
+        console.log(error);
+        res.json({
+            message: error
+        });
+    })
 });
 
 module.exports = router;

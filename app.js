@@ -16,18 +16,23 @@ app.get('/', (req, res) => {
     res.send('We are on home');
 });
 
-
+connectToDB();
 
 // Connect to DB
-mongoose.connect( 
-    process.env.DB_CONNECTION,
-    { 
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    },
-    () => console.log('Connected to DB')
-)
+
+
 
 // We start listening to the server
 app.listen(3000);
 
+async function connectToDB() {
+    mongoose.connect( 
+            process.env.DB_CONNECTION,
+            { 
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            },
+            () => console.log('Connected to DB')
+        )
+        .catch(error => console.log(error));
+}
