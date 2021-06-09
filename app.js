@@ -39,7 +39,7 @@ async function connectToDB() {
         );
 
     } catch (e) {
-        console.log("could not connect");
+        console.log(e);
     }
 }
 
