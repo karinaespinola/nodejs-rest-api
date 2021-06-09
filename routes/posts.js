@@ -7,22 +7,23 @@ router.get('/', (req, res) => {
     res.send('We are on posts');
 });
 
-router.post('/', (req, res) => {
-    const post = new Post({
-        title: req.body.title,
-        description: req.body.description
-    });
+router.post('/', async (req, res) => {
+    console.log("Soy un adulto independientee");
 
-    post.save()
-    .then(data => {
-        res.json(data);
-    })
-    .catch(error => {
-        console.log(error);
-        res.json({
-            message: error
+    try {
+        const post = new Post({
+            title: req.body.title,
+            description: req.body.description
         });
-    })
+        console.log(post);
+
+        const newPost = await post.save();
+        console.log(newPost);
+
+        res.status(201).json({ newPost });
+      } catch (err) {
+        res.status(400).json({ message: err.message });
+      }
 });
 
 module.exports = router;
